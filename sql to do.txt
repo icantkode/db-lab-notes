@@ -53,3 +53,53 @@ DEFERRING: assume PK FK relation between two tables. A record is entered into th
 	   CONSTRAINT fk_customer FOREIGN KEY (CustomerID)
            REFERENCES Customers(CustomerID) DEFERRABLE INITIALLY DEFERRED
 	   initially immediate is the default
+
+INDEX: CREATE INDEX index_name
+       ON table_name (column1, column2, ...); single column or multi-column
+
+CORRELATED SUBQUERIES: SELECT column1, column2, ...
+		       FROM table1
+		       WHERE condition
+		       (SELECT column3
+		       FROM table2
+		       WHERE table2.columnX = table1.columnY);
+SUBQUERY IN SELECT: SELECT first_name, last_name, (SELECT MAX(WEIGHT) FROM OBESE)
+		    FROM employee;
+SUBQUERY IN FROM(TEMP TABLES): SELECT t1.column1, t2.column2
+			       FROM (SELECT column1 FROM table1 WHERE condition) AS temp1
+			       JOIN (SELECT column2 FROM table2) AS temp2 ON temp1.column1 = temp2.column2;
+SUBQUERY IN HAVING AND WHERE ARE SAME AND BOTH EZ
+CROSS JOIN/CARTESIAN PRODUCT: SELECT *
+	    FROM table1, table2;
+INNER JOIN: SELECT *
+	    FROM table1
+	    INNER JOIN table2
+	    ON table1.column_name = table2.column_name;
+SELF JOIN: SELECT e1.column_name, e2.column_name
+	   FROM table_name e1
+	   INNER JOIN table_name e2
+	   ON e1.related_column = e2.related_column;
+LEFT OUTER: SELECT *
+	    FROM table1
+	    LEFT JOIN table2
+	    ON table1.columnX = table2.columnY;
+RIGHT OUTER: SELECT *
+	     FROM table1
+	     RIGHT JOIN table2
+	     ON table1.columnX = table2.columnY;
+FULL OUTER: SELECT *
+	    FROM table1
+ 	    FULL JOIN table2
+	    ON table1.columnX = table2.columnY;
+NEGATIVE DATA: use !=, NOT, NOT IN, NOT EXISTS (last two for subqueries)
+		-- Find all employees who have not placed an order
+	       SELECT *
+	       FROM Employees
+               WHERE NOT EXISTS (SELECT * FROM Orders WHERE Orders.employee_id = Employees.employee_id); used it like corr subq
+
+					OR
+		-- Find all customers who have not made any purchases
+		SELECT Customers.customer_id, Customers.customer_name
+		FROM Customers
+		LEFT JOIN Orders ON Customers.customer_id = Orders.customer_id
+		WHERE Orders.order_id IS NULL;
