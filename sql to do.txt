@@ -1,5 +1,3 @@
-from a lab exam instructor's pov, what type of advanced sql (dml and ddl) queries should there be in a database lab exam? we will be doing everything on oracle express edition. these topics are included: datatypes, IN, ANY and ALL keywords, single row/scalar functions, aggregate functions, DDL level constraints, index, deferred constraint checking (chicken egg problem), subqueries, correlated subqueries, group by having aggregate functions, subqueries in DML(select, update, insert, delete, from, where, having), cross join, inner join, self joins, left outer, right outer and full outer joins, 
-
 NOT BETWEEN
 character functions
 how to use distinct aggregate funcs: select aggr_func(distinct column) from table where condition;
